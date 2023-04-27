@@ -1,16 +1,36 @@
-# This is a sample Python script.
+import json
+from datetime import datetime
+from operator import itemgetter
+import re
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+from funcs import sort_json, date_normal
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+# Основная функция вывода
+def print_operations():
+    data = sort_json()
+    for operation in data[:5]:
+        desc = operation['description']
+        date = date_normal(operation['date'])
+        if operation.get('from'):
+            from_transfer = hide_number(operation['from'])
+        to_transfer = card_account(operation['to'])
+        summ = operation['operationAmount']['amount']
+        currency = operation['operationAmount']['currency']['name']
+        if operation.get('from'):
+            print(f'{date} {desc}\n'
+                  f'{from_transfer} -> {to_transfer}\n'
+                  f'{summ} {currency}')
+        else:
+            print(f'{date} {desc}\n'
+                  f'{to_transfer}\n'
+                  f'{summ} {currency}')
+
+
+
+
 
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    print_operations()
