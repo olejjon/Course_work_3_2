@@ -46,7 +46,7 @@ def mask_card_number(match):
 
 
 def card_account(to_transfer):
-    match = re.search(r"\d{12,19}", to_transfer)
+    match = re.search(r"\d{12,20}", to_transfer)
     # match_letter = re.search(r"\b([A-Za-z]+)\b", to_transfer)
     if not match:
         # Если номер карты не найден, возвращаем исходный текст без изменений
