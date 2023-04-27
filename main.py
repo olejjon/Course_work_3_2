@@ -1,9 +1,4 @@
-import json
-from datetime import datetime
-from operator import itemgetter
-import re
-
-from funcs import sort_json, date_normal
+from funcs import sort_json, date_normal, hide_number, card_account
 
 
 # Основная функция вывода
@@ -17,6 +12,8 @@ def print_operations():
         to_transfer = card_account(operation['to'])
         summ = operation['operationAmount']['amount']
         currency = operation['operationAmount']['currency']['name']
+
+        # выводимый текст
         if operation.get('from'):
             print(f'{date} {desc}\n'
                   f'{from_transfer} -> {to_transfer}\n'
@@ -25,10 +22,6 @@ def print_operations():
             print(f'{date} {desc}\n'
                   f'{to_transfer}\n'
                   f'{summ} {currency}')
-
-
-
-
 
 
 # Press the green button in the gutter to run the script.
